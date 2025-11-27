@@ -1,0 +1,28 @@
+{
+  "name": "ohrs",
+  "version": "1.0.0",
+  "description": "Offsite Human Resources System",
+  "homepage": "https://github.com/rushdy87/ohrs#readme",
+  "bugs": {
+    "url": "https://github.com/rushdy87/ohrs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rushdy87/ohrs.git"
+  },
+  "license": "MIT",
+  "author": "Mohammed Alrushdy",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js --watch",
+    "prod": "NODE_ENV=production node index.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.7"
+  }
+}
