@@ -8,16 +8,26 @@ const envFile =
 
 dotenv.config({ path: path.resolve(process.cwd(), envFile), quiet: true });
 
-export default {
+function required(name) {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Missing env var: ${name}`);
+  }
+  return value;
+}
+
+const config = {
   nodeEnv: process.env.NODE_ENV || 'development',
-  port: Number(process.env.PORT) || 5000,
   host: process.env.HOST || 'localhost',
+  port: Number(process.env.PORT) || 5000,
+
   db: {
-    name: process.env.DATABASE_NAME,
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    pass: process.env.DATABASE_PASSWORD,
-    port: Number(process.env.DATABASE_PORT),
-    dialect: process.env.DATABASE_DIALECT,
+    host: required('DATABASE_HOST'),
+    name: required('DATABASE_NAME'),
+    user: required('DATABASE_USER'),
+    pass: required('DATABASE_PASSWORD'),
+    dialect: required('DATABASE_DIALECT'),
   },
 };
+
+export default config;

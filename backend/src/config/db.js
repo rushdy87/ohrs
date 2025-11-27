@@ -15,15 +15,13 @@ const sequelize = new Sequelize(
 const connectDB = async () => {
   try {
     await sequelize.authenticate();
-    console.log('Database connected successfully.');
+    console.log('✅ Database connection OK'.bgGreen.black.underline);
 
-    // TEMP: sync models
-    // This MUST happen AFTER all models are imported
     await sequelize.sync({ alter: true });
-  } catch (error) {
-    console.error('DB connection error:', error);
+  } catch (err) {
+    console.error('❌ DB error:'.bgRed.white, err.message);
+    throw err;
   }
 };
 
-export default sequelize;
-export { connectDB };
+export { sequelize, connectDB };

@@ -1,5 +1,6 @@
+// src/models/unit.model.js
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/db.js';
+import { sequelize } from '../config/db.js';
 
 const Unit = sequelize.define(
   'Unit',
@@ -9,21 +10,16 @@ const Unit = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-
     code: {
       type: DataTypes.STRING(20),
       allowNull: false,
       unique: true,
-      validate: {
-        notEmpty: true,
-      },
+      validate: { notEmpty: true },
     },
-
     name: {
       type: DataTypes.STRING(150),
       allowNull: false,
     },
-
     notes: {
       type: DataTypes.TEXT,
       allowNull: true,

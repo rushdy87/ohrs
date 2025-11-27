@@ -1,4 +1,4 @@
-import { models } from '../models/index.js';
+import Unit from '../models/unit.model.js';
 
 const getAllUnits = (req, res) => {
   res.status(200).json({

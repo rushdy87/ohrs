@@ -1,18 +1,21 @@
+import 'colors';
 import envConfig from './src/config/env.js';
-import app from './src/app.js';
 import { connectDB } from './src/config/db.js';
-import './src/models/index.js';
+import app from './src/app.js';
+import './src/models/unit.model.js';
 
-const { port, host } = envConfig;
+const { host, port } = envConfig;
 
 async function start() {
   try {
     await connectDB();
     app.listen(port, host, () => {
-      console.log(`Server running at http://${host}:${port}`);
+      console.log(
+        `Server is running at ${`http://${host}:${port}`.red}`.bgWhite.black
+      );
     });
   } catch (err) {
-    console.error('Startup error:', err);
+    console.error('Startup error:'.bgRed.white, err);
   }
 }
 
