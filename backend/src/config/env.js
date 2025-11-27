@@ -12,4 +12,12 @@ export default {
   nodeEnv: process.env.NODE_ENV || 'development',
   port: Number(process.env.PORT) || 5000,
   host: process.env.HOST || 'localhost',
+  db: {
+    name: process.env.DATABASE_NAME,
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USER,
+    pass: process.env.DATABASE_PASSWORD,
+    port: Number(process.env.DATABASE_PORT),
+    dialect: process.env.DATABASE_DIALECT,
+  },
 };
