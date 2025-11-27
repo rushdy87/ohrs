@@ -1,18 +1,24 @@
 import { Router } from 'express';
+import {
+  getAllUnits,
+  getUnitById,
+  createUnit,
+  updateUnit,
+  deleteUnit,
+} from '../controllers/units.controllers.js';
 
-import unitsController from '../controllers/units.controllers.js';
+import { validateIdParam } from '../middlewares/validate-id.middleware.js';
+import { loadUnit } from '../middlewares/unit.middleware.js';
 
 const router = Router();
 
-router
-  .route('/')
-  .get(unitsController.getAllUnits)
-  .post(unitsController.createUnit);
+router.route('/').get(getAllUnits).post(createUnit);
 
 router
   .route('/:id')
-  .get(unitsController.getUnitById)
-  .put(unitsController.updateUnit)
-  .delete(unitsController.deleteUnit);
+  .all(validateIdParam, loadUnit) // applies to GET/PUT/PATCH/DELETE
+  .get(getUnitById)
+  .patch(updateUnit)
+  .delete(deleteUnit);
 
 export default router;
