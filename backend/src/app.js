@@ -1,11 +1,12 @@
 import express from 'express';
 
 import { errorHandler } from './middlewares/error.middleware.js';
-import AppError from './utils/app-error.js';
+import AppError from './core/app-error.js';
 
 import unitsRoutes from './routes/units.routes.js';
 import jobTitleRoutes from './routes/job-title.routes.js';
 import jobSpecificationRoutes from './routes/job_specification.routes.js';
+import { notFound } from './middlewares/not-found.middleware.js';
 
 const app = express();
 
@@ -24,13 +25,7 @@ app.use(`${BASE_API_PATH}/job-specifications`, jobSpecificationRoutes);
 
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
-app.use((req, res, next) => {
-  const err = new AppError(
-    `Cannot find ${req.originalUrl} on this server`,
-    404
-  );
-  next(err);
-});
+app.use(notFound);
 
 app.use(errorHandler);
 

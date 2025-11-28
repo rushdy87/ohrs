@@ -1,6 +1,6 @@
 import catchAsync from '../utils/catch-async.js';
 import handleSuccess from '../utils/handle-success.js';
-import AppError from '../utils/app-error.js';
+import AppError from '../core/app-error.js';
 
 import UnitService from '../services/unit.service.js';
 

@@ -1,4 +1,4 @@
-import AppError from '../utils/app-error.js';
+import AppError from '../core/app-error.js';
 import { validate as isUUID } from 'uuid';
 
 export const validateIdParam = (req, res, next) => {

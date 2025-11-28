@@ -1,5 +1,5 @@
 import 'colors';
-import AppError from '../utils/app-error.js';
+import AppError from '../core/app-error.js';
 
 const handleSequelizeError = (err) => {
   // Basic handling, you can extend later

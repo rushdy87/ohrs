@@ -1,4 +1,4 @@
-import AppError from '../utils/app-error.js';
+import AppError from '../core/app-error.js';
 import catchAsync from '../utils/catch-async.js';
 import handleSuccess from '../utils/handle-success.js';
 import JobTitleService from '../services/job_title.service.js';

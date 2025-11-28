@@ -10,7 +10,9 @@ async function start() {
     await connectDB();
     app.listen(port, host, () => {
       console.log(
-        `Server is running at ${`http://${host}:${port}`.red}`.bgWhite.black
+        `Server is running on ${process.env.NODE_ENV} mode at ${
+          `http://${host}:${port}`.red
+        }`.bgWhite.black
       );
     });
   } catch (err) {
