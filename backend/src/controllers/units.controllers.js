@@ -2,15 +2,10 @@ import catchAsync from '../utils/catch-async.js';
 import handleSuccess from '../utils/handle-success.js';
 import AppError from '../utils/app-error.js';
 
-import {
-  getAllUnitsService,
-  createUnitService,
-  updateUnitService,
-  deleteUnitService,
-} from '../services/unit.service.js';
+import UnitService from '../services/unit.service.js';
 
 export const getAllUnits = catchAsync(async (req, res, next) => {
-  const units = await getAllUnitsService();
+  const units = await UnitService.getAll();
   handleSuccess(res, units);
 });
 
@@ -25,7 +20,7 @@ export const createUnit = catchAsync(async (req, res, next) => {
     return next(new AppError('Name and code are required', 400));
   }
 
-  const newUnit = await createUnitService({ name, code, notes });
+  const newUnit = await UnitService.create({ name, code, notes });
 
   handleSuccess(res, newUnit, 'Unit created', 201);
 });
@@ -37,13 +32,13 @@ export const updateUnit = catchAsync(async (req, res, next) => {
     return next(new AppError('No fields to update', 400));
   }
 
-  const updatedUnit = await updateUnitService(req.unit, { name, code, notes });
+  const updatedUnit = await UnitService.update(req.unit, { name, code, notes });
 
   handleSuccess(res, updatedUnit, 'Unit updated');
 });
 
 export const deleteUnit = catchAsync(async (req, res, next) => {
-  await deleteUnitService(req.unit);
+  await UnitService.remove(req.unit);
 
   res.status(204).end();
 });

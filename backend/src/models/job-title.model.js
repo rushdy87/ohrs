@@ -12,6 +12,7 @@ const JobTitle = sequelize.define(
     title: {
       type: DataTypes.STRING(150),
       allowNull: false,
+      unique: true,
     },
     grade: {
       type: DataTypes.INTEGER,

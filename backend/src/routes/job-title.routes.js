@@ -15,7 +15,7 @@ const router = Router();
 router.route('/').get(getAllJobTitles).post(createJobTitle);
 
 router
-  .route('/:jobTitleId')
+  .route('/:id')
   .all(validateIdParam, loadJobTitle)
   .get(getJobTitleById)
   .put(updateJobTitle)
