@@ -6,7 +6,7 @@ import {
   createJobTitle,
   updateJobTitle,
   deleteJobTitle,
-} from '../controllers/job_titles.controllers.js';
+} from '../controllers/job_title.controllers.js';
 import { validateIdParam } from '../middlewares/validate-id.middleware.js';
 import { loadJobTitle } from '../middlewares/job_title.middleware.js';
 
