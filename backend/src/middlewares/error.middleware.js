@@ -1,4 +1,5 @@
 import 'colors';
+import { ZodError } from 'zod';
 import AppError from '../core/app-error.js';
 
 const handleSequelizeError = (err) => {
@@ -22,6 +23,15 @@ const handleSequelizeError = (err) => {
   }
 
   return err;
+};
+
+const handleZodError = (err) => {
+  const messages = err.issues.map((e) => {
+    const path = e.path.join('.');
+    return `${path}: ${e.message}`;
+  });
+
+  return new AppError(messages.join(' | '), 400);
 };
 
 const sendErrorDev = (err, req, res) => {
@@ -59,11 +69,17 @@ const errorHandler = (err, req, res, next) => {
   error.statusCode = error.statusCode || 500;
   error.status = error.status || 'error';
 
-  // Map Sequelize errors to AppError in prod/dev
+  // 1) Zod errors
+  if (err instanceof ZodError || (err.issues && Array.isArray(err.issues))) {
+    error = handleZodError(err);
+  }
+
+  // 2) Sequelize errors
   if (error.name && error.name.startsWith('Sequelize')) {
     error = handleSequelizeError(error);
   }
 
+  // 3) Development vs production
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(error, req, res);
   } else {

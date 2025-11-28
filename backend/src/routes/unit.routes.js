@@ -7,13 +7,20 @@ import {
   deleteUnit,
 } from '../controllers/units.controllers.js';
 
-import { validateIdParam } from '../middlewares/validate.middleware.js';
+import {
+  validateIdParam,
+  validateBodyWithZod,
+} from '../middlewares/validate.middleware.js';
+import { createUnitSchema } from '../validation/unit.schema.js';
 import { load } from '../middlewares/load.middleware.js';
 import { Unit } from '../models/index.js';
 
 const router = Router();
 
-router.route('/').get(getAllUnits).post(createUnit);
+router
+  .route('/')
+  .get(getAllUnits)
+  .post(validateBodyWithZod(createUnitSchema), createUnit);
 
 router
   .route('/:id')

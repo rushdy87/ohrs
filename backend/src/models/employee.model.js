@@ -17,7 +17,7 @@ const Employee = sequelize.define(
 
     name_en: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
 
     employee_no: {
@@ -142,8 +142,7 @@ const Employee = sequelize.define(
 
     remuneration_group: {
       type: DataTypes.ENUM('first', 'second', 'both'),
-      allowNull: false,
-      defaultValue: 'both',
+      allowNull: true,
     },
 
     is_active: {
