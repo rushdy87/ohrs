@@ -6,8 +6,8 @@ const Unit = sequelize.define(
   'Unit',
   {
     id: {
-      type: DataTypes.BIGINT,
-      autoIncrement: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
     code: {

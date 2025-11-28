@@ -1,9 +1,12 @@
 import AppError from '../utils/app-error.js';
+import { validate as isUUID } from 'uuid';
 
 export const validateIdParam = (req, res, next) => {
   const { id } = req.params;
-  if (!id || isNaN(id)) {
-    return next(new AppError('Invalid ID parameter', 400));
+
+  if (!id || !isUUID(id)) {
+    return next(new AppError('Invalid UUID format', 400));
   }
+
   next();
 };
