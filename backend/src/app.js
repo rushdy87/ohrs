@@ -1,6 +1,7 @@
 import express from 'express';
 
 import unitsRoutes from './routes/units.routes.js';
+import jobTitleRoutes from './routes/job-title.routes.js';
 import { errorHandler } from './middlewares/error.middleware.js';
 import AppError from './utils/app-error.js';
 
@@ -16,6 +17,7 @@ app.get('/health', (req, res) => {
 });
 
 app.use(`${BASE_API_PATH}/units`, unitsRoutes);
+app.use(`${BASE_API_PATH}/job-titles`, jobTitleRoutes);
 
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
