@@ -1,4 +1,4 @@
-import JobSpecification from '../models/job-specification.model.js';
+import { JobSpecification } from '../models/index.js';
 import AppError from '../utils/app-error.js';
 
 export const loadJobSpecification = async (req, res, next) => {

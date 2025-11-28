@@ -1,4 +1,4 @@
-import Unit from '../models/unit.model.js';
+import { Unit } from '../models/index.js';
 import AppError from '../utils/app-error.js';
 
 export const loadUnit = async (req, res, next) => {

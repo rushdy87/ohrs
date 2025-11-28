@@ -1,4 +1,4 @@
-import JobTitle from '../models/job-title.model.js';
+import { JobTitle } from '../models/index.js';
 import AppError from '../utils/app-error.js';
 
 export const loadJobTitle = async (req, res, next) => {

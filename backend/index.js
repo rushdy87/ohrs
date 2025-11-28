@@ -2,7 +2,6 @@ import 'colors';
 import envConfig from './src/config/env.js';
 import { connectDB } from './src/config/db.js';
 import app from './src/app.js';
-import './src/models/unit.model.js';
 
 const { host, port } = envConfig;
 
