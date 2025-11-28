@@ -11,7 +11,10 @@ import {
   validateIdParam,
   validateBodyWithZod,
 } from '../middlewares/validate.middleware.js';
-import { createUnitSchema } from '../validation/unit.schema.js';
+import {
+  createUnitSchema,
+  updateUnitSchema,
+} from '../validation/unit.schema.js';
 import { load } from '../middlewares/load.middleware.js';
 import { Unit } from '../models/index.js';
 
@@ -26,7 +29,7 @@ router
   .route('/:id')
   .all(validateIdParam, load(Unit, 'unit')) // applies to GET/PUT/PATCH/DELETE
   .get(getUnitById)
-  .patch(updateUnit)
+  .put(validateBodyWithZod(updateUnitSchema), updateUnit)
   .delete(deleteUnit);
 
 export default router;

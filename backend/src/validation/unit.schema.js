@@ -15,3 +15,7 @@ export const createUnitSchema = z
     notes: z.string().optional(),
   })
   .strip();
+
+export const updateUnitSchema = createUnitSchema.partial();
+// partial makes all fields optional for updates
+// .strip() is inherited, so extra fields are still removed

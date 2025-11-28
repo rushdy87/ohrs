@@ -8,11 +8,11 @@ export default class BaseService {
   }
 
   create(data) {
-    return this.Model.create(data);
+    return this.Model.create({ ...data });
   }
 
   update(instance, data) {
-    return instance.update(data);
+    return instance.update({ ...data });
   }
 
   remove(instance) {

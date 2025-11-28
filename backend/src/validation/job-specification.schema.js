@@ -34,3 +34,8 @@ export const createJobSpecificationSchema = z
  * - Use .strip() to remove extra properties and return only the defined keys.
  * - Use .passthrough() to allow extra properties to remain in the validated object.
  */
+
+export const updateJobSpecificationSchema =
+  createJobSpecificationSchema.partial();
+// partial makes all fields optional for updates
+// .strip() is inherited, so extra fields are still removed

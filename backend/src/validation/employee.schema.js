@@ -130,3 +130,7 @@ export const createEmployeeSchema = z
     job_specification_id: z.string().uuid().optional(),
   })
   .strip(); // تحذف أي حقول غير معرّفة في الـ schema
+
+export const updateEmployeeSchema = createEmployeeSchema.partial();
+// partial makes all fields optional for updates
+// .strip() is inherited, so extra fields are still removed

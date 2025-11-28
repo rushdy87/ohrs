@@ -1,10 +1,14 @@
 import catchAsync from '../utils/catch-async.js';
 import handleSuccess from '../utils/handle-success.js';
-import AppError from '../core/app-error.js';
 import employeeService from '../services/employee.service.js';
 
 export const getAllEmployees = catchAsync(async (req, res, next) => {
   const employees = await employeeService.getAll();
+  handleSuccess(res, employees);
+});
+
+export const getActiveEmployees = catchAsync(async (req, res, next) => {
+  const employees = await employeeService.getAllActive();
   handleSuccess(res, employees);
 });
 
@@ -13,7 +17,7 @@ export const getEmployeeById = catchAsync(async (req, res, next) => {
 });
 
 export const createEmployee = catchAsync(async (req, res, next) => {
-  const newEmployee = await employeeService.create(req);
+  const newEmployee = await employeeService.create(req.body);
 
   handleSuccess(res, newEmployee, 'Employee created', 201);
 });
@@ -28,4 +32,9 @@ export const deleteEmployee = catchAsync(async (req, res, next) => {
   await employeeService.remove(req.employee);
 
   res.status(204).end();
+});
+
+export const getDeletedEmployees = catchAsync(async (req, res, next) => {
+  const deletedEmployees = await employeeService.getDeleted();
+  handleSuccess(res, deletedEmployees);
 });

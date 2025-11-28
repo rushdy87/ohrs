@@ -13,7 +13,10 @@ import {
 } from '../middlewares/validate.middleware.js';
 import { load } from '../middlewares/load.middleware.js';
 import { JobTitle } from '../models/index.js';
-import { createJobTitleSchema } from '../validation/job-title.schema.js';
+import {
+  createJobTitleSchema,
+  updateJobTitleSchema,
+} from '../validation/job-title.schema.js';
 
 const router = Router();
 
@@ -25,7 +28,7 @@ router
   .route('/:id')
   .all(validateIdParam, load(JobTitle, 'jobTitle'))
   .get(getJobTitleById)
-  .put(updateJobTitle)
+  .put(validateBodyWithZod(updateJobTitleSchema), updateJobTitle)
   .delete(deleteJobTitle);
 
 export default router;
