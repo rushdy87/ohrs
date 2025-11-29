@@ -4,9 +4,15 @@ import handleSuccess from '../utils/handle-success.js';
 import JobTitleService from '../services/job_title.service.js';
 
 export const getAllJobTitles = catchAsync(async (req, res, next) => {
-  const jobTitles = await JobTitleService.getAll(req.query, {}, [
-    ['title', 'ASC'],
-  ]);
+  const jobTitles = await JobTitleService.getAll(
+    req.query,
+    {},
+    {
+      defaultSort: [['title', 'ASC']],
+      searchTextFields: ['title_search'],
+      searchNumericFields: ['grade'],
+    }
+  );
   handleSuccess(res, jobTitles);
 });
 

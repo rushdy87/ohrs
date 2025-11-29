@@ -1,6 +1,7 @@
 import { Op } from 'sequelize';
+import { normalizeArabic } from '../utils/arabic-normalize.js';
 
-const EXCLUDE_FIELDS = ['page', 'sort', 'limit', 'fields'];
+const EXCLUDE_FIELDS = ['page', 'sort', 'limit', 'fields', 'search'];
 
 // @description: Class to handle API features like filtering for Sequelize queries
 // @usage: new ApiFeatures(req.query).filter().options
@@ -100,6 +101,56 @@ export default class ApiFeatures {
     this.options.offset = offset;
 
     this.options.pagination = { page, limit, offset };
+
+    return this;
+  }
+
+  // @description: Applies search functionality across specified text and numeric fields
+  // @example: ?search=John - with textFields=['name_ar_search']
+  // @example: ?search=1001 - with numericFields=['employee_no']
+  // @param {Array} textFields - Array of text field names to search
+  // @param {Array} numericFields - Array of numeric field names to search
+  // @returns {ApiFeatures} - Returns the ApiFeatures instance for chaining
+  search(textFields = [], numericFields = []) {
+    const rawTerm = this.queryString.search || this.queryString.q;
+
+    if (!rawTerm) return this;
+
+    const term = normalizeArabic(rawTerm);
+
+    const where = this.options.where || {};
+
+    const orConditions = [];
+
+    // iLike non-sensitive search for text fields
+    if (textFields.length > 0) {
+      for (const field of textFields) {
+        orConditions.push({
+          [field]: { [Op.iLike]: `%${term}%` },
+        });
+      }
+    }
+
+    // Exact match for numeric fields
+    if (numericFields.length > 0 && !isNaN(term)) {
+      const num = Number(term);
+      for (const field of numericFields) {
+        orConditions.push({ [field]: num });
+      }
+    }
+
+    if (orConditions.length === 0) {
+      return this;
+    }
+
+    // Combine with existing where conditions
+    if (where[Op.or]) {
+      where[Op.or] = [...where[Op.or], ...orConditions];
+    } else {
+      where[Op.or] = orConditions;
+    }
+
+    this.options.where = where;
 
     return this;
   }

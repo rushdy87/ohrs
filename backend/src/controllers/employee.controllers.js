@@ -3,9 +3,15 @@ import handleSuccess from '../utils/handle-success.js';
 import employeeService from '../services/employee.service.js';
 
 export const getAllEmployees = catchAsync(async (req, res, next) => {
-  const employees = await employeeService.getAll(req.query, {}, [
-    ['employee_no', 'ASC'],
-  ]);
+  const employees = await employeeService.getAll(
+    req.query,
+    {},
+    {
+      defaultSort: [['employee_no', 'ASC']],
+      searchTextFields: ['name_ar_search'],
+      searchNumericFields: ['employee_no'],
+    }
+  );
   handleSuccess(res, employees);
 });
 
@@ -15,9 +21,28 @@ export const getActiveEmployees = catchAsync(async (req, res, next) => {
     {
       is_active: true,
     },
-    [['employee_no', 'ASC']]
+    {
+      defaultSort: [['employee_no', 'ASC']],
+      searchTextFields: ['name_ar_search'],
+      searchNumericFields: ['employee_no'],
+    }
   );
   handleSuccess(res, employees);
+});
+
+export const getDeletedEmployees = catchAsync(async (req, res, next) => {
+  const deletedEmployees = await employeeService.getAll(
+    req.query,
+    {
+      is_active: false,
+    },
+    {
+      defaultSort: [['employee_no', 'ASC']],
+      searchTextFields: ['name_ar_search'],
+      searchNumericFields: ['employee_no'],
+    }
+  );
+  handleSuccess(res, deletedEmployees);
 });
 
 export const getEmployeeById = catchAsync(async (req, res, next) => {
@@ -40,15 +65,4 @@ export const deleteEmployee = catchAsync(async (req, res, next) => {
   await employeeService.remove(req.employee);
 
   res.status(204).end();
-});
-
-export const getDeletedEmployees = catchAsync(async (req, res, next) => {
-  const deletedEmployees = await employeeService.getAll(
-    req.query,
-    {
-      is_active: false,
-    },
-    [['employee_no', 'ASC']]
-  );
-  handleSuccess(res, deletedEmployees);
 });

@@ -26,6 +26,11 @@ const JobTitle = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    title_search: {
+      // for optimized Arabic text search
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     tableName: 'job_titles',

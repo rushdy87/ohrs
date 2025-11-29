@@ -174,6 +174,12 @@ const Employee = sequelize.define(
       allowNull: true,
       references: { model: 'job_specifications', key: 'id' },
     },
+
+    name_ar_search: {
+      // for optimized Arabic text search
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     tableName: 'employees',

@@ -16,6 +16,8 @@ const handleSequelizeError = (err) => {
   }
 
   if (err.name === 'SequelizeDatabaseError') {
+    console.log(`Error: ${err}`);
+
     return new AppError(
       'Database error. Please contact the administrator.',
       500

@@ -8,10 +8,15 @@ export default class BaseService {
   async getAll(
     queryString = {},
     extraWhere = {},
-    defaultSort = [['createdAt', 'DESC']]
+    {
+      defaultSort = [['createdAt', 'DESC']],
+      searchTextFields = [],
+      searchNumericFields = [],
+    } = {}
   ) {
     const features = new ApiFeatures(queryString, defaultSort)
       .filter()
+      .search(searchTextFields, searchNumericFields)
       .sort()
       .limitFields()
       .paginate()
