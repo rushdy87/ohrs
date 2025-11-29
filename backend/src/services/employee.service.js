@@ -7,19 +7,6 @@ class EmployeeService extends BaseService {
     await instance.update({ is_active: false });
     return instance;
   }
-
-  // ✅ get only deleted (inactive) employees
-  async getDeleted() {
-    return this.Model.findAll({
-      where: { is_active: false },
-    });
-  }
-
-  async getAllActive() {
-    return this.Model.findAll({
-      where: { is_active: true },
-    });
-  }
 }
 
 export default new EmployeeService(Employee);

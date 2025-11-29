@@ -3,12 +3,20 @@ import handleSuccess from '../utils/handle-success.js';
 import employeeService from '../services/employee.service.js';
 
 export const getAllEmployees = catchAsync(async (req, res, next) => {
-  const employees = await employeeService.getAll();
+  const employees = await employeeService.getAll(req.query, {}, [
+    ['employee_no', 'ASC'],
+  ]);
   handleSuccess(res, employees);
 });
 
 export const getActiveEmployees = catchAsync(async (req, res, next) => {
-  const employees = await employeeService.getAllActive();
+  const employees = await employeeService.getAll(
+    req.query,
+    {
+      is_active: true,
+    },
+    [['employee_no', 'ASC']]
+  );
   handleSuccess(res, employees);
 });
 
@@ -35,6 +43,12 @@ export const deleteEmployee = catchAsync(async (req, res, next) => {
 });
 
 export const getDeletedEmployees = catchAsync(async (req, res, next) => {
-  const deletedEmployees = await employeeService.getDeleted();
+  const deletedEmployees = await employeeService.getAll(
+    req.query,
+    {
+      is_active: false,
+    },
+    [['employee_no', 'ASC']]
+  );
   handleSuccess(res, deletedEmployees);
 });

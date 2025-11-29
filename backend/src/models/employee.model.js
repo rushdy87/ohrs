@@ -141,7 +141,7 @@ const Employee = sequelize.define(
     },
 
     remuneration_group: {
-      type: DataTypes.ENUM('first', 'second', 'both'),
+      type: DataTypes.ENUM('first', 'second', 'monthly', 'loader'),
       allowNull: true,
     },
 
