@@ -2,6 +2,7 @@ import Unit from './unit.model.js';
 import JobTitle from './job-title.model.js';
 import JobSpecification from './job-specification.model.js';
 import Employee from './employee.model.js';
+import User from './user.model.js';
 
 // ----------------------------------------
 // Unit <--> Employees (One-to-Many)
@@ -42,4 +43,17 @@ Employee.belongsTo(JobSpecification, {
   as: 'job_specification',
 });
 
-export { Unit, JobTitle, JobSpecification, Employee };
+// ----------------------------------------
+// Unit <--> User (One-to-Many)
+// ----------------------------------------
+Unit.hasMany(User, {
+  foreignKey: 'unit_id',
+  as: 'users',
+});
+
+User.belongsTo(Unit, {
+  foreignKey: 'unit_id',
+  as: 'unit',
+});
+
+export { Unit, JobTitle, JobSpecification, Employee, User };

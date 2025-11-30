@@ -28,6 +28,11 @@ const config = {
     pass: required('DATABASE_PASSWORD'),
     dialect: required('DATABASE_DIALECT'),
   },
+  saltRounds: Number(process.env.SALT_ROUNDS) || 10,
+  jwt: {
+    secret: required('JWT_SECRET'),
+    expiresIn: process.env.JWT_EXPIRES_IN || '7d',
+  },
 };
 
 export default config;
