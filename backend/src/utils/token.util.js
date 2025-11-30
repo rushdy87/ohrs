@@ -17,8 +17,8 @@ export const signToken = (user) => {
     {
       id: user.id,
       role: user.role,
-      unitId: user.unitId,
-      isActive: user.isActive,
+      unit_id: user.unit_id,
+      is_active: user.is_active,
     },
     secret,
     { expiresIn }
@@ -26,5 +26,9 @@ export const signToken = (user) => {
 };
 
 export const verifyToken = (token) => {
-  return jwt.verify(token, JWT_SECRET);
+  const secret = config.jwtSecret || process.env.JWT_SECRET;
+  if (!secret) {
+    throw new Error('JWT secret is not defined');
+  }
+  return jwt.verify(token, secret);
 };

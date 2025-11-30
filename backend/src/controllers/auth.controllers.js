@@ -42,3 +42,7 @@ export const login = catchAsync(async (req, res, next) => {
 
   handleSuccess(res, { user: safeUser, token });
 });
+
+export const logout = (req, res) => {
+  handleSuccess(res, null, 'Logged out successfully');
+};

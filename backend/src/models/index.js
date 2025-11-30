@@ -3,6 +3,7 @@ import JobTitle from './job-title.model.js';
 import JobSpecification from './job-specification.model.js';
 import Employee from './employee.model.js';
 import User from './user.model.js';
+import Evaluation from './evaluation.model.js';
 
 // ----------------------------------------
 // Unit <--> Employees (One-to-Many)
@@ -55,5 +56,30 @@ User.belongsTo(Unit, {
   foreignKey: 'unit_id',
   as: 'unit',
 });
+// ----------------------------------------
+// Employee 1 <--> N Evaluation
+// ----------------------------------------
+Employee.hasMany(Evaluation, {
+  foreignKey: 'employee_id',
+  as: 'evaluations',
+});
 
-export { Unit, JobTitle, JobSpecification, Employee, User };
+Evaluation.belongsTo(Employee, {
+  foreignKey: 'employee_id',
+  as: 'employee',
+});
+
+// ----------------------------------------
+// User 1 <--> N Evaluation
+// ----------------------------------------
+User.hasMany(Evaluation, {
+  foreignKey: 'evaluator_id',
+  as: 'givenEvaluations',
+});
+
+Evaluation.belongsTo(User, {
+  foreignKey: 'evaluator_id',
+  as: 'evaluator',
+});
+
+export { Unit, JobTitle, JobSpecification, Employee, User, Evaluation };

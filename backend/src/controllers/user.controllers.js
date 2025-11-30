@@ -16,3 +16,15 @@ export const createUser = catchAsync(async (req, res, next) => {
 
   handleSuccess(res, newUser, 'User created', 201);
 });
+
+export const updateUser = catchAsync(async (req, res, next) => {
+  const updatedUser = await UserService.update(req.user.id, req.body);
+
+  handleSuccess(res, updatedUser, 'User updated');
+});
+
+export const deleteUser = catchAsync(async (req, res, next) => {
+  await UserService.delete(req.user.id);
+
+  handleSuccess(res, null, 'User deleted', 204);
+});

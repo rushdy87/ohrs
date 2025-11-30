@@ -23,7 +23,7 @@ export const createUserSchema = z
     // متوافق مع الـ model: INTEGER
     unit_id: z.string().uuid().optional(),
 
-    isActive: z.boolean().optional(),
+    is_active: z.boolean().optional(),
   })
   .strip();
 

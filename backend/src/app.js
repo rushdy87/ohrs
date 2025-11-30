@@ -9,6 +9,7 @@ import unitRoutes from './routes/unit.routes.js';
 import jobTitleRoutes from './routes/job-title.routes.js';
 import jobSpecificationRoutes from './routes/job_specification.routes.js';
 import employeeRoutes from './routes/employee.routes.js';
+import { protect } from './middlewares/auth.middlewares.js';
 
 const app = express();
 
@@ -22,6 +23,8 @@ app.get('/health', (req, res) => {
 });
 
 app.use(`${BASE_API_PATH}/auth`, authRoutes);
+
+app.use(protect);
 app.use(`${BASE_API_PATH}/users`, userRoutes);
 app.use(`${BASE_API_PATH}/units`, unitRoutes);
 app.use(`${BASE_API_PATH}/job-titles`, jobTitleRoutes);
