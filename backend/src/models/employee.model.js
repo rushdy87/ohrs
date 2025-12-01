@@ -105,11 +105,6 @@ const Employee = sequelize.define(
       allowNull: true,
     },
 
-    loaning_end_date: {
-      type: DataTypes.DATEONLY,
-      allowNull: true,
-    },
-
     ppe_size: {
       type: DataTypes.ENUM('XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL'),
       allowNull: true,

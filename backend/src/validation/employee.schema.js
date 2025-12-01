@@ -103,9 +103,6 @@ export const createEmployeeSchema = z
     // جهة الإعارة - اختياري
     loaning_from: z.string().max(255).optional(),
 
-    // تاريخ نهاية الإعارة - اختياري
-    loaning_end_date: dateString.optional(),
-
     // حجم معدات الوقاية
     ppe_size: ppeSizeEnum.optional(),
 

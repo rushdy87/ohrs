@@ -1,7 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { sequelize } from '../config/db.js';
-
-export const ALLOWED_SCORES = [73, 76, 79, 83, 86, 89, 90];
+import { ALLOWED_SCORES } from '../constants/evaluation.constants.js';
 
 const Evaluation = sequelize.define(
   'Evaluation',

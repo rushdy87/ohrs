@@ -2,6 +2,7 @@ import express from 'express';
 
 import { errorHandler } from './middlewares/error.middleware.js';
 import { notFound } from './middlewares/not-found.middleware.js';
+import { protect } from './middlewares/auth.middlewares.js';
 
 import authRoutes from './routes/auth.routes.js';
 import userRoutes from './routes/user.routes.js';
@@ -9,7 +10,7 @@ import unitRoutes from './routes/unit.routes.js';
 import jobTitleRoutes from './routes/job-title.routes.js';
 import jobSpecificationRoutes from './routes/job_specification.routes.js';
 import employeeRoutes from './routes/employee.routes.js';
-import { protect } from './middlewares/auth.middlewares.js';
+import evaluationRoutes from './routes/evaluation.routes.js';
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(`${BASE_API_PATH}/units`, unitRoutes);
 app.use(`${BASE_API_PATH}/job-titles`, jobTitleRoutes);
 app.use(`${BASE_API_PATH}/job-specifications`, jobSpecificationRoutes);
 app.use(`${BASE_API_PATH}/employees`, employeeRoutes);
+app.use(`${BASE_API_PATH}/evaluations`, evaluationRoutes);
 
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
