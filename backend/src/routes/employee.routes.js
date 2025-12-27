@@ -31,9 +31,9 @@ router
 
 router
   .route('/:id')
-  .all(validateIdParam, load(Employee, 'employee')) // applies to GET/PUT/PATCH/DELETE
+  .all(validateIdParam, load(Employee, 'employee')) // applies to GET/patch/PATCH/DELETE
   .get(getEmployeeById)
-  .put(validateBodyWithZod(updateEmployeeSchema), updateEmployee)
+  .patch(validateBodyWithZod(updateEmployeeSchema), updateEmployee)
   .delete(deleteEmployee);
 
 export default router;

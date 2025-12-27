@@ -12,6 +12,7 @@ export default class BaseService {
       defaultSort = [['createdAt', 'DESC']],
       searchTextFields = [],
       searchNumericFields = [],
+      include = [],
     } = {}
   ) {
     const features = new ApiFeatures(queryString, defaultSort)
@@ -23,6 +24,11 @@ export default class BaseService {
       .build();
 
     features.where = { ...features.where, ...extraWhere };
+
+    // includes used for eager loading associations
+    if (include && include.length > 0) {
+      features.include = include;
+    }
 
     const { rows, count } = await this.Model.findAndCountAll(features);
 

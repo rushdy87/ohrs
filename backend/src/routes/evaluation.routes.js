@@ -26,10 +26,9 @@ router
   .route('/:id')
   .all(validateIdParam, load(Evaluation, 'evaluation')) // applies to GET/PATCH/DELETE
   .get(EvaluationControllers.getEvaluationById)
-  .put(
+  .patch(
     validateBodyWithZod(updateEvaluationSchema),
     EvaluationControllers.updateEvaluation
-  )
-  .delete(EvaluationControllers.deleteEvaluation);
+  );
 
 export default router;

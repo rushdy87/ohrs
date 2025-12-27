@@ -25,7 +25,7 @@ export const createJobSpecificationSchema = z
  *
  * .strict(): This method ensures that the object being validated contains only the keys defined in the schema. If there are any extra keys present in the object that are not defined in the schema, Zod will throw a validation error. This is useful when you want to enforce a strict shape for your data and reject any unexpected properties.
  *
- * .strip(): This method removes any keys from the object that are not defined in the schema. Instead of throwing an error for extra keys, Zod will simply ignore them and return an object that contains only the keys specified in the schema. This is useful when you want to allow extra properties but don't want them to be included in the validated output.
+ * .strip(): This method removes any keys from the object that are not defined in the schema. Instead of throwing an error for extra keys, Zod will simply ignore them and return an object that contains only the keys specified in the schema. This is useful when you want to allow extra properties but don't want them to be included in the validated outpatch.
  *
  * .passthrough(): This method allows extra keys to remain in the object without throwing an error or removing them. The validated object will include both the keys defined in the schema and any additional keys that were present in the original object. This is useful when you want to validate certain properties but still retain any extra data that may be present.
  *

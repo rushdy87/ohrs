@@ -34,6 +34,14 @@ class EvaluationService extends BaseService {
         ['month', 'DESC'],
         ['createdAt', 'DESC'],
       ],
+      include: [
+        {
+          association: 'employee',
+          attributes: [],
+          where: { is_active: true },
+          required: true,
+        },
+      ],
       //TODO: enable search if needed
       // searchTextFields: [],
       // searchNumericFields: [],

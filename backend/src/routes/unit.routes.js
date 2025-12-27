@@ -27,9 +27,9 @@ router
 
 router
   .route('/:id')
-  .all(validateIdParam, load(Unit, 'unit')) // applies to GET/PUT/PATCH/DELETE
+  .all(validateIdParam, load(Unit, 'unit')) // applies to GET/patch/PATCH/DELETE
   .get(getUnitById)
-  .put(validateBodyWithZod(updateUnitSchema), updateUnit)
+  .patch(validateBodyWithZod(updateUnitSchema), updateUnit)
   .delete(deleteUnit);
 
 export default router;

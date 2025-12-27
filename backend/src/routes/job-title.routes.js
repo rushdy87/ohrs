@@ -28,7 +28,7 @@ router
   .route('/:id')
   .all(validateIdParam, load(JobTitle, 'jobTitle'))
   .get(getJobTitleById)
-  .put(validateBodyWithZod(updateJobTitleSchema), updateJobTitle)
+  .patch(validateBodyWithZod(updateJobTitleSchema), updateJobTitle)
   .delete(deleteJobTitle);
 
 export default router;

@@ -34,7 +34,7 @@ export const createEvaluation = catchAsync(async (req, res, next) => {
 });
 
 // @desc    Update an evaluation
-// @route   PUT /api/v1/evaluations/:id
+// @route   patch /api/v1/evaluations/:id
 // @access  Private
 
 export const updateEvaluation = catchAsync(async (req, res, next) => {
@@ -44,12 +44,4 @@ export const updateEvaluation = catchAsync(async (req, res, next) => {
   );
 
   handleSuccess(res, updatedEvaluation, 'Evaluation updated successfully');
-});
-
-// @desc    Delete an evaluation
-// @route   DELETE /api/v1/evaluations/:id
-// @access  Private
-export const deleteEvaluation = catchAsync(async (req, res, next) => {
-  await EvaluationService.remove(req.evaluation);
-  res.status(204).end();
 });

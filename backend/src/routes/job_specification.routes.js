@@ -33,7 +33,7 @@ router
   .route('/:id')
   .all(validateIdParam, load(JobSpecification, 'jobSpecification'))
   .get(getJobSpecificationById)
-  .put(
+  .patch(
     validateBodyWithZod(updateJobSpecificationSchema),
     updateJobSpecification
   )
